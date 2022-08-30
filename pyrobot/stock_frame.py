@@ -15,6 +15,13 @@ from pandas.core.window import RollingGroupby
 class StockFrame():
     
     def __init__(self, data: List[dict]) -> None:
+        """Initialize the stock data frame object.
+
+        Args:
+            data (List[dict]): The data that is to be converted to a data frame. Normally would be
+                                the historical prices endpoint.
+                                
+        """
         
         self._data = data
         self._frame: pd.DataFrame = self.create_frame()
@@ -23,10 +30,16 @@ class StockFrame():
         
     @property
     def frame(self) -> pd.DataFrame:
+        """The frame object.
+
+        Returns:
+            pd.DataFrame: A pandas data frame with the price data.
+        """
         return self._frame
     
     @property
     def symbol_groups(self) -> DataFrameGroupBy:
+
         self._symbol_groups = self._frame.groupby(
             by='symbol',
             as_index=False,
